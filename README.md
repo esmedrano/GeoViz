@@ -23,8 +23,8 @@ Follow these steps to set up the project locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/geoviz-by-ben.git
-cd geoviz-by-ben
+git clone https://github.com/BenRoshan100/GeoViz.git
+cd GeoViz
 ```
 
 ### 2. Set Up Virtual Environment
@@ -61,21 +61,19 @@ By default, the app will run on http://localhost:5000.
 
 If you encounter an error stating that the address is already in use, the port 5000 may be occupied by another process. You can either stop that process or start the app on a different port.
 
-Option 1: Stop the Process Using Port 5000
+a. Run the following command to find the process ID (PID) using port 5000:
 
-	1.	Run the following command to find the process ID (PID) using port 5000:
-    
-    ```bash
-    lsof -i :5000
-    ```
+```bash
+lsof -i :5000
+```
 
-    2.	You’ll get an output showing the process ID (PID). Use the kill command to stop it:
+b.	You’ll get an output showing the process ID (PID). Use the kill command to stop it:
 
-    ```bash
-    kill -9 <PID>
-    ```
+```bash
+kill -9 <PID>
+```
 
-    3.	After stopping the process, restart the Flask app.
+c.	After stopping the process, restart the Flask app.
 
 ## How to Use GeoViz by Ben
 

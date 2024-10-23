@@ -2,6 +2,8 @@
 
 GeoViz by Ben is a geohash visualizer built with Flask and Folium. It allows users to visualize geospatial data on an interactive map. By inputting a dataset with a `geohash` column and additional metrics, users can set custom color thresholds to visually represent those metrics across geographic regions.
 
+![Screenshot of GeoViz](images/geoviz_interface.png)
+
 ## Features
 
 - Upload datasets with geohash-based data.

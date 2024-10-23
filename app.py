@@ -83,11 +83,31 @@ def map_view():
     
     if 'geohash' in column_names:
         column_names.remove('geohash')
+
+    # Calculate the bounding box (min/max lat and lon)
+    lats = []
+    lons = []
+    
+    for idx, row in data_frame.iterrows():
+        geohash = row['geohash']
+        polygon_points = geohash_to_polygon(geohash)
+        for lat, lon in polygon_points:
+            lats.append(lat)
+            lons.append(lon)
+    
+    if not lats or not lons:
+        return jsonify({'error': 'Invalid geohash data.'}), 400
+
+    # Calculate centroid
+    min_lat, max_lat = min(lats), max(lats)
+    min_lon, max_lon = min(lons), max(lons)
+    center_lat = (min_lat + max_lat) / 2
+    center_lon = (min_lon + max_lon) / 2
     
     
     print("Columns in DataFrame:", column_names)
     
-    m = folium.Map(location=[12.975563860577177, 77.5713505708612], zoom_start=10)
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=8)
     
     for idx, row in data_frame.iterrows():
         geohash = row['geohash']

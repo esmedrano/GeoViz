@@ -167,10 +167,10 @@ Future<List<List<String>>> collectGeohashesInRings(double latitude, double longi
 main() async{
   // READ ME
   // Set the 4 variables below to get a .csv of the geohash rings within a radius
-  double userLat = 32.8170239;
-  double userLon = -97.0901545;
-  String fileName = 'file2';
-  int radius = 25;
+  double userLat = 45.0;
+  double userLon = -45.0;
+  String fileName = 'file1';
+  int radius = 5;
   /////////////////////////////////////////////////////////////////////////////
   
   String hash = GeoHasher().encode(userLon, userLat, precision: 6);

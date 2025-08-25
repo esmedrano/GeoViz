@@ -9,7 +9,7 @@ List<List<String>> shortenGeohashRings(List<List<String>> geohashRings, String o
     }).toList();
   } 
 
-  if (!initialQuery) {  // This removes all the matching rings and all rings before
+  if (!initialQuery) {  // This removes all matching ring and all rings before
     final firstMatchIndex = geohashRings.indexWhere((ring) => ring.any((hash) => hash == optimalPrefix));
     filteredRings = firstMatchIndex != -1 ? geohashRings.sublist(firstMatchIndex + 2) : [];
   }

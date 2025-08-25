@@ -1,6 +1,7 @@
 import 'package:dart_geohash/dart_geohash.dart';
 import 'dart:math';
 import 'get_csv.dart' as csv;
+import 'shorten_hashes.dart' as shorten;
 
 List<dynamic> test(String centerGeohash) {
   final geohashes = [];
@@ -166,16 +167,36 @@ Future<List<List<String>>> collectGeohashesInRings(double latitude, double longi
 
 main() async{
   // READ ME
-  // Set the 4 variables below to get a .csv of the geohash rings within a radius
+  // Set the 6 variables below to get a .csv of the geohash rings within a radius
   double userLat = 45.0;
   double userLon = -45.0;
   String fileName = 'file1';
   int radius = 5;
+
+  // Change these if shortening the list of geohash rings
+  bool shortenRing = true;  // Turn on shortening with this
+  String targetHash = '9vff';  // Choose a hash to shorten to
+
+  // Choose one of these
+  bool shortenToTargetHash = false;  
+  bool removeAllRingsWithinTargetHash = true;  // defaults to this if none chosen
   /////////////////////////////////////////////////////////////////////////////
   
   String hash = GeoHasher().encode(userLon, userLat, precision: 6);
   
   final geohashRings = await collectGeohashesInRings(userLat, userLon, radius, hash);
+
+  if (shortenRing) {
+    bool shortenMethod = true;
+    if (shortenToTargetHash) {
+      shortenMethod = false;
+    } 
+    if (removeAllRingsWithinTargetHash) {
+      shortenMethod = removeAllRingsWithinTargetHash;
+    }
+
+    shorten.shortenGeohashRings(geohashRings, targetHash, shortenMethod);
+  }
 
   csv.generateCsvFile(geohashRings, prefix: fileName);
 }

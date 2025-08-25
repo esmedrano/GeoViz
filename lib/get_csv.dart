@@ -10,8 +10,8 @@ Future<void> generateCsvFile(List<List<String>> datasetA, {String prefix = 'data
     // final String dirPath = Directory.current.path;
 
     // Use the explicitly specified project root path
-    final String dirPath = 'C:\\Users\\esmed\\Documents\\inspect_hashes\\';
-
+    final String dirPath = Directory.current.path;
+    
     // Generate CSV for Dataset A (flatten List<List<String>>)
     final fileA = File('$dirPath${prefix}_a.csv');
     final bufferA = StringBuffer();

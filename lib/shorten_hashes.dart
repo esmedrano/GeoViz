@@ -9,12 +9,9 @@ List<List<String>> shortenGeohashRings(List<List<String>> geohashRings, String o
     }).toList();
   } 
 
-  if (!initialQuery) {
-    // Find the index of the first ring containing a hash that exactly matches optimalPrefix
+  if (!initialQuery) {  // This removes all the matching rings and all rings before
     final firstMatchIndex = geohashRings.indexWhere((ring) => ring.any((hash) => hash == optimalPrefix));
-    
-    // Keep the matching ring and all subsequent rings, or empty list if no match
-    filteredRings = firstMatchIndex != -1 ? geohashRings.sublist(firstMatchIndex) : [];
+    filteredRings = firstMatchIndex != -1 ? geohashRings.sublist(firstMatchIndex + 2) : [];
   }
 
   // Log for debugging

@@ -13,7 +13,7 @@ Future<void> generateCsvFile(List<List<String>> datasetA, {String prefix = 'data
     final String dirPath = Directory.current.path;
     
     // Generate CSV for Dataset A (flatten List<List<String>>)
-    final fileA = File('$dirPath${prefix}_a.csv');
+    final fileA = File('$dirPath${prefix}.csv');
     final bufferA = StringBuffer();
     bufferA.writeln('geohash,value'); // CSV header
     for (List<String> geohashList in datasetA) {

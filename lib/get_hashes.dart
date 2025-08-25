@@ -166,37 +166,39 @@ Future<List<List<String>>> collectGeohashesInRings(double latitude, double longi
 }
 
 main() async{
+  ////////////////////////////////////////////////////////////////////////////////////////
+  
   // READ ME
   // Set the 6 variables below to get a .csv of the geohash rings within a radius
   double userLat = 32.8170474;
   double userLon = -97.0900305;
-  String fileName = 'file1';
-  int radius = 5;
+  int radius1 = 15;
+  int radius2 = 35;
 
   // Change these if shortening the list of geohash rings
-  bool shortenRing = true;  // Turn on shortening with this
-  String targetHash = '9vff';  // Choose a hash to shorten to
+  bool shortenRing = true;  // Turn on shortening with this                                         
 
-  // Choose one of these
-  bool shortenToTargetHash = false;  
-  bool removeAllRingsWithinTargetHash = true;  // defaults to this if none chosen
-  /////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////
   
+  String file1 = '_radius1';
+  String file2 = '_radius2';
   String hash = GeoHasher().encode(userLon, userLat, precision: 6);
   
-  List<List<String>> geohashRings = await collectGeohashesInRings(userLat, userLon, radius, hash);
+  List<List<String>> radius_1_geohashRings = await collectGeohashesInRings(userLat, userLon, radius1, hash);
+  List<List<String>> radius_2_geohashRings = await collectGeohashesInRings(userLat, userLon, radius2, hash);
+  
+  // getTargetGeohash is used to get the prefix radius miles due north of the users location
+  // Itwas used to tell the ring algo when to stop building the first geohash grid
+  // Now it is used again to filter the rings within the first radius from the second radius
+  //
+  // The goal is to have no overlap between the two grids 
+  String targetGeohash_2 = await getTargetGeohash(userLat, userLon, radius1);  
 
   if (shortenRing) {
-    bool shortenMethod = true;
-    if (shortenToTargetHash) {
-      shortenMethod = false;
-    } 
-    if (removeAllRingsWithinTargetHash) {
-      shortenMethod = removeAllRingsWithinTargetHash;
-    }
-
-    geohashRings = shorten.shortenGeohashRings(geohashRings, targetHash, shortenMethod);
+    radius_1_geohashRings = shorten.shortenGeohashRings(radius_1_geohashRings, '9vff', true);
+    radius_2_geohashRings = shorten.shortenGeohashRings(radius_2_geohashRings, targetGeohash_2, false);
   }
 
-  csv.generateCsvFile(geohashRings, prefix: fileName);
+  csv.generateCsvFile(radius_1_geohashRings, prefix: file1);
+  csv.generateCsvFile(radius_2_geohashRings, prefix: file2);
 }

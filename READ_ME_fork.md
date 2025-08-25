@@ -10,3 +10,7 @@ Generate csv files with rings of geohashes using the script in the lib folder ti
 - they will appear in the root of the project
 
 Use the generated .csv files in GeoViz
+
+
+NOTE: 
+- you may need to install other deps such as python, dart, etc. Not sure what yall have yet

@@ -1,7 +1,44 @@
-<!DOCTYPE html>
+<!-- Version 1 -->
+<!-- <!DOCTYPE html>
 <html>
 <body>
     <h1>Geohash Visualization</h1>
     {{ map_html | safe }}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoViz - Map</title>
+    <style>
+        #map { height: 600px; width: 100%; }
+        #map-iframe { width: 100%; height: 100%; border: none; }
+        #controls { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 10px; border: 1px solid #ccc; }
+        .legend { margin-top: 10px; }
+        .legend div { display: flex; align-items: center; margin-bottom: 5px; }
+        .legend-color { width: 20px; height: 20px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div id="map">
+        <iframe id="map-iframe" src="{{ url_for('uploaded_file', filename=map_path) }}"></iframe>
+    </div>
+    <div id="controls">
+        <h3>Geohash Grid</h3>
+        <form method="post" action="{{ url_for('index') }}">
+            {% for i in range(1, 7) %}
+            <label>
+                <input type="checkbox" name="precisions" value="{{ i }}" {% if i in precisions %}checked{% endif %} />
+                Precision {{ i }}
+            </label><br />
+            {% endfor %}
+            <button type="submit">Update Grid</button>
+        </form>
+        <div class="legend">
+            <div><span class="legend-color" style="background-color: blue;"></span>Dataset A</div>
+            <div><span class="legend-color" style="background-color: red;"></span>Dataset B</div>
+            <div><span class="legend-color" style="background-color: black;"></span>Grid</div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- Version 1 -->
+<!-- <!DOCTYPE html>
 <html>
 <body>
     <h1>Upload Geohash CSVs</h1>
@@ -6,6 +7,29 @@
         <p>Dataset A: <input type="file" name="file_a"></p>
         <p>Dataset B: <input type="file" name="file_b"></p>
         <input type="submit" value="Visualize">
+    </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoViz - Upload Datasets</title>
+</head>
+<body>
+    <h1>Upload Datasets</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="file_a">Dataset A (CSV):</label>
+        <input type="file" name="file_a" accept=".csv" required><br><br>
+        <label for="file_b">Dataset B (CSV):</label>
+        <input type="file" name="file_b" accept=".csv" required><br><br>
+        <label>Grid Precisions:</label><br>
+        {% for i in range(1, 7) %}
+        <label>
+            <input type="checkbox" name="precisions" value="{{ i }}" />
+            Precision {{ i }}
+        </label><br />
+        {% endfor %}
+        <button type="submit">Generate Map</button>
     </form>
 </body>
 </html>

@@ -172,8 +172,8 @@ main() async{
   // Set the 6 variables below to get a .csv of the geohash rings within a radius
   double userLat = 32.8170474;
   double userLon = -97.0900305;
-  int radius1 = 15;
-  int radius2 = 35;
+  int radius1 = 10;
+  int radius2 = 20;
 
   // Change these if shortening the list of geohash rings
   bool shortenRing = true;  // Turn on shortening with this                                         

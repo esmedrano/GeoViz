@@ -1,6 +1,6 @@
 This is a modified version of the original GeoViz that takes lists of geohashes and shows their location on the map
 
-To use, download and extract the code.zip, then open a terminal at the path of the folder.
+To use, download the code and open a terminal at the path of the folder.
 
 Start GeoViz with: python app.py
 
@@ -10,7 +10,3 @@ Generate csv files with rings of geohashes using the script in the lib folder ti
 - they will appear in the root of the project
 
 Use the generated .csv files in GeoViz
-
-
-NOTE: 
-- you may need to install other deps such as python, dart, etc. Not sure what yall have yet

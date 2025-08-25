@@ -1,6 +1,6 @@
 This is a modified version of the original GeoViz that takes lists of geohashes and shows their location on the map
 
-To use, download the code and open a terminal at the path of the folder.
+To use, download and extract the code.zip, then open a terminal at the path of the folder.
 
 Start GeoViz with: python app.py
 
